@@ -1421,7 +1421,7 @@ read-gitrepo-file() {
     SAY=false OUT=true RUN git config --file="$gitrepo" subrepo.remote
     subrepo_remote=$output
     if [[ -n $GH_PAT && $subrepo_remote == *"github.com"* ]]; then
-      subrepo_remote=${subrepo_remote/github.com/g-simmons:${GH_PAT}@github.com}
+      subrepo_remote=$(echo "$subrepo_remote" | sed "s|github.com|g-simmons:${GH_PAT}@github.com|")
     fi
   fi
 
