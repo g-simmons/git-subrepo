@@ -1420,6 +1420,9 @@ read-gitrepo-file() {
   if [[ -z $subrepo_remote ]]; then
     SAY=false OUT=true RUN git config --file="$gitrepo" subrepo.remote
     subrepo_remote=$output
+    if [[ -n $GH_PAT && $subrepo_remote == *"github.com"* ]]; then
+      subrepo_remote=${subrepo_remote/github.com/${GH_PAT}@github.com}
+    fi
   fi
 
   if [[ -z $subrepo_branch ]]; then
